@@ -27,6 +27,16 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddGrpc();
 
+// Configure Kestrel to listen on a specific HTTP port 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080);
+    options.ListenAnyIP(7179, listenOptions =>
+    {
+        listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
+    });
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
