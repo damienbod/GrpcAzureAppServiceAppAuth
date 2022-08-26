@@ -1,7 +1,9 @@
 ﻿using Grpc.Net.Client;
+using GrpcAzureAppServiceAppAuth;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
+using Grpc.Core;
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -31,6 +33,12 @@ else
 {
     Console.WriteLine(authResult.AccessToken);
 
+    var tokenValue = "Bearer " + authResult.AccessToken;
+    var metadata = new Metadata
+    {
+        { "Authorization", tokenValue }
+    };
+
     var handler = new HttpClientHandler();
 
     var channel = GrpcChannel.ForAddress(
@@ -38,16 +46,16 @@ else
         new GrpcChannelOptions
     {
         HttpClient = new HttpClient(handler)
+        
     });
+
+    CallOptions callOptions = new CallOptions(metadata);
 
     var client = new Greeter.GreeterClient(channel);
 
-    client.DefaultRequestHeaders.Authorization
-      = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
-    client.DefaultRequestHeaders.Accept
-        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    var reply = await client.SayHelloAsync(
+        new HelloRequest { Name = "GreeterClient" }, callOptions);
 
-    var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
     Console.WriteLine("Greeting: " + reply.Message);
 
     Console.WriteLine("Press any key to exit...");
