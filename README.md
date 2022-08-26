@@ -1,4 +1,6 @@
-# GrpcAzureAppServiceCertAuth
+# GRPC Azure App Service Microsoft.Identity.Web
+
+## Secure ASP.NET Core GRPC API hosted in an Linux kestrel Azure App Service
 
 ## Links
 
