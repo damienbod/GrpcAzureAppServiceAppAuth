@@ -31,23 +31,27 @@ else
 {
     Console.WriteLine(authResult.AccessToken);
 
-    // 3. Use access token to access token
-    var client = new HttpClient
+    var handler = new HttpClientHandler();
+
+    var channel = GrpcChannel.ForAddress(
+        configuration["AzureADServiceApi:ApiBaseAddress"], 
+        new GrpcChannelOptions
     {
-        BaseAddress = new Uri(configuration["AzureADServiceApi:ApiBaseAddress"])
-    };
+        HttpClient = new HttpClient(handler)
+    });
+
+    var client = new Greeter.GreeterClient(channel);
 
     client.DefaultRequestHeaders.Authorization
-        = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
+      = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
     client.DefaultRequestHeaders.Accept
         .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-    var response = await client.GetAsync("ApiForServiceData");
+    var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
+    Console.WriteLine("Greeting: " + reply.Message);
 
-    if (response.IsSuccessStatusCode)
-    {
-        Console.WriteLine(await response.Content.ReadAsStringAsync());
-    }
+    Console.WriteLine("Press any key to exit...");
+    Console.ReadKey();
 }
 
 
