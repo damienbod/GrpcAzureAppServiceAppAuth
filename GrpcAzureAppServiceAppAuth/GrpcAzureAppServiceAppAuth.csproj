@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-GrpcAzureAppServiceAppAuth-A108D861-2E06-4CE2-AA06-716BC9D052C3</UserSecretsId>
   </PropertyGroup>
 
     <ItemGroup>
