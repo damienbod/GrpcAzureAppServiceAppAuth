@@ -53,7 +53,7 @@ else
 
 //var handler = new HttpClientHandler();
 
-//var channel = GrpcChannel.ForAddress("https://localhost:44379", new GrpcChannelOptions
+//var channel = GrpcChannel.ForAddress("https://localhost:7179", new GrpcChannelOptions
 //{
 //    HttpClient = new HttpClient(handler)
 //});
