@@ -2,6 +2,8 @@
 
 ## Secure ASP.NET Core GRPC API hosted in an Linux kestrel Azure App Service
 
+![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/appServiceGrpc_01.png)
+
 ## Links
 
 https://github.com/grpc/grpc-dotnet/
