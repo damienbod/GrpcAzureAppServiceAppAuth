@@ -1,6 +1,5 @@
 ﻿using Grpc.Net.Client;
 using GrpcAzureAppServiceAppAuth;
-using System.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using Grpc.Core;
@@ -61,17 +60,3 @@ else
     Console.WriteLine("Press any key to exit...");
     Console.ReadKey();
 }
-
-
-//var handler = new HttpClientHandler();
-
-//var channel = GrpcChannel.ForAddress("https://localhost:7179", new GrpcChannelOptions
-//{
-//    HttpClient = new HttpClient(handler)
-//});
-
-//var client = new Greeter.GreeterClient(channel);
-//var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
-//Console.WriteLine("Greeting: " + reply.Message);
-//Console.WriteLine("Press any key to exit...");
-//Console.ReadKey();
