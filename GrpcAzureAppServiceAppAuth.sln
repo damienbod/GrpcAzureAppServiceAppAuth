@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcAzureAppServiceAppAuth", "GrpcAzureAppServiceAppAuth\GrpcAzureAppServiceAppAuth.csproj", "{70ABED2A-5194-4714-82FF-9C4C14699429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcAzureAppServiceAppAuth", "GrpcAzureAppServiceAppAuth\GrpcAzureAppServiceAppAuth.csproj", "{70ABED2A-5194-4714-82FF-9C4C14699429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcAppClientConsole", "GrpcAppClientConsole\GrpcAppClientConsole.csproj", "{EBDEA57D-4A1A-4C50-87F2-2E5D185F03DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcAppClientConsole", "GrpcAppClientConsole\GrpcAppClientConsole.csproj", "{EBDEA57D-4A1A-4C50-87F2-2E5D185F03DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59D9BBAC-997A-4EF7-A08E-78DDA1363977}"
 	ProjectSection(SolutionItems) = preProject
-		..\README.md = ..\README.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
