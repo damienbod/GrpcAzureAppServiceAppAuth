@@ -33,6 +33,7 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(8080);
     options.ListenAnyIP(7179, listenOptions =>
     {
+        listenOptions.UseHttps(); // required for local debugging, not for the Azure deployment
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
     });
 });
