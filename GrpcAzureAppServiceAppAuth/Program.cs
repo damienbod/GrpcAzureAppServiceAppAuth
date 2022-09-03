@@ -1,6 +1,7 @@
 using GrpcAzureAppServiceAppAuth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddAuthorization(options =>
     {
         // Validate id of application for which the token was created
         // In this case the CC client application 
-        validateAccessTokenPolicy.RequireClaim("azp", "b178f3a5-7588-492a-924f-72d7887b7e48");
+        validateAccessTokenPolicy.RequireClaim("azp", "19893e32-3f4d-4c5a-b5ca-27891cf75666");
 
         // only allow tokens which used "Private key JWT Client authentication"
         // // https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens
@@ -37,6 +38,8 @@ builder.WebHost.ConfigureKestrel(options =>
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
     });
 });
+
+IdentityModelEventSource.ShowPII = true;
 
 var app = builder.Build();
 
