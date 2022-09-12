@@ -90,8 +90,6 @@ Set-AzureADApplication -ObjectId $myApp.ObjectID -IdentifierUris $IdentifierUris
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
 
-# ServicePrincipal needs to be validated if this is required
-
 $createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -AppId $myApp.AppId -DisplayName $appName
 
 Write-Host 'service principal:'
