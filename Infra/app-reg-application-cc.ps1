@@ -1,5 +1,5 @@
 Param( [string]$tenantId = "" )
-$appName = "DamienTestCC2"
+$appName = "DamienTestCC3"
 $appRoleName = "application-role-test"
 $allowPassthroughUsers = false
 ##################################
@@ -81,6 +81,19 @@ $Scope.IsEnabled = $false
 $Scopes.Add($Scope)
 Set-AzureADApplication -ObjectId $myApp.ObjectID -Oauth2Permissions $Scopes
 
+$apiUrl = "api://" + $myApp.AppId
+$IdentifierUris = New-Object System.Collections.Generic.List[string]
+$IdentifierUris.Add($apiUrl)
+
+Set-AzureADApplication -ObjectId $myApp.ObjectID -IdentifierUris $IdentifierUris
+
+$servicePrincipal = Get-AzureADServicePrincipal -Filter "appId eq '$myApp.AppId'"
+  
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
+
+Write-Host 'service principal:'
+Write-Host $servicePrincipal
+
+
  
