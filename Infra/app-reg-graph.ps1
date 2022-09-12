@@ -6,9 +6,7 @@ $allowPassthroughUsers = false
 ##################################
 
 function testParams {
-
-	if (!$tenantId) 
-	{ 
+	if (!$tenantId) { 
 		Write-Host "tenantId is null"
 		exit 1
 	}
@@ -23,13 +21,12 @@ Write-Host "Begin API Azure App Registration Graph application"
 ### https://docs.microsoft.com/en-us/powershell/module/azuread/new-azureadapplication?view=azureadps-2.0
 ### https://stackoverflow.com/questions/42164581/how-to-configure-a-new-azure-ad-application-through-powershell
 ##################################
-
 $Guid = New-Guid
 $startDate = Get-Date
 
 $PasswordCredential = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordCredential
 $PasswordCredential.StartDate = $startDate
-$PasswordCredential.EndDate = $startDate.AddYears(10)
+$PasswordCredential.EndDate = $startDate.AddYears(20)
 $PasswordCredential.KeyId = $Guid
 $PasswordCredential.Value = ([System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(($Guid))))
 
@@ -40,6 +37,9 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 	Write-Host $myApp | Out-String | ConvertFrom-Json	
 }
 
+##################################
+### Create an RequiredResourceAccess for the Application Graph permissions
+##################################
 $req = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
 $acc1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "62a82d76-70ea-41e2-9197-370581804d09","Role"
 $acc2 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "5b567255-7703-4780-807c-7be8301ae99b","Role"
@@ -52,13 +52,23 @@ $req.ResourceAccess = $acc1,$acc2,$acc3,$acc4,$acc5,$acc6,$acc7
 $req.ResourceAppId = "00000003-0000-0000-c000-000000000000"
 Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $req
 
-# Disable the App Registration scope.
+##################################
+### Disable the App Registration scope.
+##################################
 $Scopes = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.OAuth2Permission]
 $Scope = $myApp.Oauth2Permissions | Where-Object { $_.Value -eq "user_impersonation" }
 $Scope.IsEnabled = $false
 $Scopes.Add($Scope)
 Set-AzureADApplication -ObjectId $myApp.ObjectID -Oauth2Permissions $Scopes
 
+##################################
+### Create a service principal
+##################################
+$createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -AppId $myApp.AppId -DisplayName $appName
+
+##################################
+### Print the secret to upload to user secrets or a key vault
+##################################
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
  
