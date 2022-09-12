@@ -1,5 +1,5 @@
 Param( [string]$tenantId = "" )
-$appName = "DamienTestCC3"
+$appName = "DamienTestCC4"
 $appRoleName = "application-role-test"
 $allowPassthroughUsers = false
 ##################################
@@ -87,13 +87,14 @@ $IdentifierUris.Add($apiUrl)
 
 Set-AzureADApplication -ObjectId $myApp.ObjectID -IdentifierUris $IdentifierUris
 
-$servicePrincipal = Get-AzureADServicePrincipal -Filter "appId eq '$myApp.AppId'"
-  
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
 
-Write-Host 'service principal:'
-Write-Host $servicePrincipal
+# ServicePrincipal needs to be validated if this is required
 
+$createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -AppId $myApp.AppId -DisplayName $appName
+
+Write-Host 'service principal:'
+Write-Host $createdServicePrincipal.ObjectID
 
  
