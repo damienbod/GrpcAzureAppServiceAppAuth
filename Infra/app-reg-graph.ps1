@@ -71,6 +71,10 @@ $createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -Ap
 ##################################
 ### Print the secret to upload to user secrets or a key vault
 ##################################
+Write-Host 'service principal:'
+Write-Host $createdServicePrincipal.ObjectID
+
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
+
  
