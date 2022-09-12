@@ -1,5 +1,6 @@
 Param( [string]$tenantId = "" )
-$appName = "DamienTestCC1"
+$appName = "DamienTestCC2"
+$appRoleName = "application-role-test"
 $allowPassthroughUsers = false
 ##################################
 ### testParams
@@ -15,6 +16,20 @@ function testParams {
 }
 
 testParams
+
+# Create an Azure AD role of given name and description
+function CreateApplicationAppRole([string] $Name, [string] $Description)
+{
+    $appRole = New-Object Microsoft.Open.AzureAD.Model.AppRole
+    $appRole.AllowedMemberTypes = New-Object System.Collections.Generic.List[string]
+    $appRole.AllowedMemberTypes.Add("Application");
+    $appRole.DisplayName = $Name
+    $appRole.Id = New-Guid
+    $appRole.IsEnabled = $true
+    $appRole.Description = $Description
+    $appRole.Value = $Name;
+    return $appRole
+}
 
 Write-Host "Begin API Azure App Registration CC application with role application"
 
@@ -41,7 +56,17 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 }
 
 # TODO create role
-$appRoleId = "62a82d76-70ea-41e2-9197-370581804d09"
+
+$appRoles = $myApp.AppRoles
+Write-Host "App Roles before addition of new role.."
+Write-Host $appRoles
+
+$newRole = CreateApplicationAppRole -Name $appRoleName -Description $appRoleName
+$appRoles.Add($newRole)
+
+Set-AzureADApplication -ObjectId $myApp.ObjectId -AppRoles $appRoles 
+
+$appRoleId = $newRole.Id
 
 $req = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
 $acc1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $appRoleId,"Role"
