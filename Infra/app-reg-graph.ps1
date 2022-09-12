@@ -4,14 +4,12 @@ $allowPassthroughUsers = false
 ##################################
 ### testParams
 ##################################
-
 function testParams {
 	if (!$tenantId) { 
 		Write-Host "tenantId is null"
 		exit 1
 	}
 }
-
 testParams
 
 Write-Host "Begin API Azure App Registration Graph application"

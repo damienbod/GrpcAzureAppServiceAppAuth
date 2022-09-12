@@ -1,3 +1,4 @@
+# TODO set access token version 2
 Param( [string]$tenantId = "" )
 $appName = "DamienTestCC4"
 $appRoleName = "application-role-test"
@@ -5,15 +6,12 @@ $allowPassthroughUsers = false
 ##################################
 ### testParams
 ##################################
-# TODO set access token version 2
-
 function testParams {
 	if (!$tenantId) { 
 		Write-Host "tenantId is null"
 		exit 1
 	}
 }
-
 testParams
 
 ##################################
