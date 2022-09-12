@@ -1,5 +1,5 @@
 Param( [string]$tenantId = "" )
-$appName = "DamienTestAPI7"
+$appName = "DamienTestCC1"
 $allowPassthroughUsers = false
 ##################################
 ### testParams
@@ -16,7 +16,7 @@ function testParams {
 
 testParams
 
-Write-Host "Begin API Azure App Registration Graph application"
+Write-Host "Begin API Azure App Registration CC application with role application"
 
 ##################################
 ### Create Azure App Registration for Graph
@@ -40,16 +40,13 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 	Write-Host $myApp | Out-String | ConvertFrom-Json	
 }
 
+# TODO create role
+$appRoleId = "62a82d76-70ea-41e2-9197-370581804d09"
+
 $req = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
-$acc1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "62a82d76-70ea-41e2-9197-370581804d09","Role"
-$acc2 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "5b567255-7703-4780-807c-7be8301ae99b","Role"
-$acc3 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "9e3f62cf-ca93-4989-b6ce-bf83c28f9fe8","Role"
-$acc4 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "741f803b-c850-494e-b5df-cde7c675a1ca","Role"
-$acc5 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "df021288-bdef-4463-88db-98f22de89214","Role"
-$acc6 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "7ab1d382-f21e-4acd-a863-ba3e13f7da61","Role"
-$acc7 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "19dbc75e-c2e2-444c-a770-ec69d8559fc7","Role"
-$req.ResourceAccess = $acc1,$acc2,$acc3,$acc4,$acc5,$acc6,$acc7
-$req.ResourceAppId = "00000003-0000-0000-c000-000000000000"
+$acc1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $appRoleId,"Role"
+$req.ResourceAccess = $acc1
+$req.ResourceAppId = $myApp.AppId
 Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $req
 
 # Disable the App Registration scope.
