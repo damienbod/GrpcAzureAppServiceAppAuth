@@ -1,12 +1,15 @@
 Param( [string]$tenantId = "" )
-$appName = "DamienTestAPI7"
-$allowPassthroughUsers = false
+Param( [string]$appName = "" )
 ##################################
 ### testParams
 ##################################
 function testParams {
 	if (!$tenantId) { 
 		Write-Host "tenantId is null"
+		exit 1
+	}
+	if (!$appName) { 
+		Write-Host "appName is null"
 		exit 1
 	}
 }
@@ -21,6 +24,7 @@ Write-Host "Begin API Azure App Registration Graph application"
 ##################################
 $Guid = New-Guid
 $startDate = Get-Date
+$allowPassthroughUsers = false
 
 $PasswordCredential = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordCredential
 $PasswordCredential.StartDate = $startDate

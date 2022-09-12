@@ -1,14 +1,17 @@
 # TODO set access token version 2
 Param( [string]$tenantId = "" )
-$appName = "DamienTestCC4"
+Param( [string]$appName = "" )
 $appRoleName = "application-role-test"
-$allowPassthroughUsers = false
 ##################################
 ### testParams
 ##################################
 function testParams {
 	if (!$tenantId) { 
 		Write-Host "tenantId is null"
+		exit 1
+	}
+	if (!$appName) { 
+		Write-Host "appName is null"
 		exit 1
 	}
 }
@@ -39,6 +42,7 @@ Write-Host "Begin API Azure App Registration CC application with role applicatio
 ##################################
 $Guid = New-Guid
 $startDate = Get-Date
+$allowPassthroughUsers = false
 
 $PasswordCredential = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordCredential
 $PasswordCredential.StartDate = $startDate
