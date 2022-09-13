@@ -31,7 +31,6 @@ testSubscription
 ### Set accessTokenAcceptedVersion to version 2
 ##################################
 
-
 $Body = @{
     api = @{
         requestedAccessTokenVersion = 2

@@ -20,24 +20,11 @@ Run the script replacing the tenantId and your Azure App Registration name:
 Login 
 
 ```
-az login -tenantId 5698af84-5720-4ff0-bdc3-9d9195314244
+az login --tenant 5698af84-5720-4ff0-bdc3-9d9195314244
 ```
 
-
-You can read the id from the manufest "id": "ba62783f-fb6b-48a9-ba51-f56355e84926",
+You can read the id from the manufest (ObjectId) "id": "ba62783f-fb6b-48a9-ba51-f56355e84926",
 
 ```
 .\update-access-token-version2.ps1 -TenantId 5698af84-5720-4ff0-bdc3-9d9195314244 ba62783f-fb6b-48a9-ba51-f56355e84926
-```
-
-# Set application to use V2 access tokens
-
-```
-$Body = @{
-    api = @{
-        requestedAccessTokenVersion = 2
-    }
-} | ConvertTo-Json -Compress | ConvertTo-Json
-$null = az rest --method PATCH --uri "https://graph.microsoft.com/v1.0/applications/ba62783f-fb6b-48a9-ba51-f56355e84926" --body $Body --headers "Content-Type=application/json"
-
 ```
