@@ -1,5 +1,4 @@
-Param( [string]$tenantId = "" )
-Param( [string]$appName = "" )
+Param( [string]$tenantId = "", [string]$appName = "" )
 ##################################
 ### testParams
 ##################################

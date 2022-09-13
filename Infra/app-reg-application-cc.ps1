@@ -1,6 +1,4 @@
-# TODO set access token version 2
-Param( [string]$tenantId = "" )
-Param( [string]$appName = "" )
+Param( [string]$tenantId = "", [string]$appName = "" )
 $appRoleName = "application-role-test"
 ##################################
 ### testParams
@@ -107,5 +105,3 @@ Write-Host $createdServicePrincipal.ObjectID
 
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
-
- 
