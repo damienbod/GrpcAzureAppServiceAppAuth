@@ -52,15 +52,13 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 {
     $myApp = New-AzureADApplication -DisplayName $appName -PasswordCredentials $PasswordCredential -AllowPassthroughUsers $allowPassthroughUsers
 
-	Write-Host $myApp | Out-String | ConvertFrom-Json	
+	# Write-Host $myApp | Out-String | ConvertFrom-Json	
 }
 
 ##################################
 ### Create an Azure App role and add this to the App registration
 ##################################
 $appRoles = $myApp.AppRoles
-Write-Host "App Roles before addition of new role.."
-Write-Host $appRoles
 $newRole = CreateApplicationAppRole -Name $appRoleName -Description $appRoleName
 $appRoles.Add($newRole)
 Set-AzureADApplication -ObjectId $myApp.ObjectId -AppRoles $appRoles 
@@ -100,8 +98,11 @@ $createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -Ap
 ##################################
 ### Print the secret to upload to user secrets or a key vault
 ##################################
-Write-Host 'service principal:'
+Write-Host 'Service principal ObjectID:'
 Write-Host $createdServicePrincipal.ObjectID
-
-Write-Host 'client secret:'
+Write-Host '-----'
+Write-Host 'Client secret value:'
 Write-Host $PasswordCredential.Value
+Write-Host '-----'
+Write-Host 'App Registration ID:'
+Write-Host $myApp.ObjectID
