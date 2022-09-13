@@ -31,10 +31,13 @@ testSubscription
 ### Set accessTokenAcceptedVersion to version 2
 ##################################
 
-$params = @{
-	RequestedAccessTokenVersion = 2
-}
 
-Update-MgApplication -ApplicationId $appRegObjectId -BodyParameter $params
+$Body = @{
+    api = @{
+        requestedAccessTokenVersion = 2
+    }
+} | ConvertTo-Json -Compress | ConvertTo-Json
+$null = az rest --method PATCH --uri "https://graph.microsoft.com/v1.0/applications/$($appRegObjectId)" --body $Body --headers "Content-Type=application/json"
+
 
 Write-Host " - Updated accessTokenAcceptedVersion to 2"
