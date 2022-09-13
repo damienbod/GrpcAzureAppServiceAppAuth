@@ -14,6 +14,19 @@ function testParams {
 }
 testParams
 
+function testSubscription {
+    $account = az account show | ConvertFrom-Json
+	$accountTenantId = $account.tenantId
+    if ($accountTenantId -ne $tenantId) 
+	{ 
+		Write-Host "$accountTenantId not possible, change account"
+		exit 1
+	}
+	$accountName = $account.name
+    Write-Host "tenant: $accountName can update"
+}
+testSubscription
+
 ##################################
 ### Set signInAudience to AzureADMyOrg
 ### Set accessTokenAcceptedVersion to version 2
