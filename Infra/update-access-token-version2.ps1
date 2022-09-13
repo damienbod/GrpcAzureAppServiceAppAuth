@@ -28,31 +28,13 @@ function testSubscription {
 testSubscription
 
 ##################################
-### Set signInAudience to AzureADMyOrg
 ### Set accessTokenAcceptedVersion to version 2
 ##################################
-$bodyApi = '{
-	"signInAudience" : "AzureADMyOrg", 
-	"accessTokenAcceptedVersion": 2
-}' | ConvertTo-Json | ConvertFrom-Json
 
-# https://docs.microsoft.com/en-us/graph/api/application-update
-$idAppForGraphApi = $appRegObjectId
-$tokenResponseApi = az account get-access-token --resource https://graph.microsoft.com
-$tokenApi = ($tokenResponseApi | ConvertFrom-Json).accessToken
-#Write-Host "$token"
-$uriApi = 'https://graph.microsoft.com/beta/applications/' + $idAppForGraphApi
-Write-Host " - $uriApi"
-$headersApi = @{
-    "Authorization" = "Bearer $tokenApi"
+$params = @{
+	RequestedAccessTokenVersion = 2
 }
 
-Invoke-RestMethod `
-	-ContentType application/json `
-	-Uri $uriApi `
-	-Method Patch `
-	-Headers $headersApi `
-	-Body $bodyApi
+Update-MgApplication -ApplicationId $appRegObjectId -BodyParameter $params
 
-Write-Host " - Updated signInAudience to AzureADMyOrg"
 Write-Host " - Updated accessTokenAcceptedVersion to 2"
