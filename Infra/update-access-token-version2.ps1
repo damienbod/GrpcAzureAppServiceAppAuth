@@ -19,7 +19,7 @@ function testSubscription {
 	$accountTenantId = $account.tenantId
     if ($accountTenantId -ne $tenantId) 
 	{ 
-		Write-Host "$accountTenantId not possible, change account"
+		Write-Host "$accountTenantId not possible please change the change account"
 		exit 1
 	}
 	$accountName = $account.name
@@ -47,7 +47,7 @@ $headersApi = @{
     "Authorization" = "Bearer $tokenApi"
 }
 
-Invoke-RestMethod  `
+Invoke-RestMethod `
 	-ContentType application/json `
 	-Uri $uriApi `
 	-Method Patch `
