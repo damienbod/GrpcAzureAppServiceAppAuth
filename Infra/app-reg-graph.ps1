@@ -35,7 +35,7 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 {
     $myApp = New-AzureADApplication -DisplayName $appName -PasswordCredentials $PasswordCredential -AllowPassthroughUsers $allowPassthroughUsers
 
-	Write-Host $myApp | Out-String | ConvertFrom-Json	
+	# Write-Host $myApp | Out-String | ConvertFrom-Json	
 }
 
 ##################################
@@ -72,8 +72,9 @@ $createdServicePrincipal = New-AzureADServicePrincipal -AccountEnabled $true -Ap
 ##################################
 Write-Host 'service principal:'
 Write-Host $createdServicePrincipal.ObjectID
-
+Write-Host '-----'
 Write-Host 'client secret:'
 Write-Host $PasswordCredential.Value
+Write-Host '-----'
 
  

@@ -106,3 +106,4 @@ Write-Host $PasswordCredential.Value
 Write-Host '-----'
 Write-Host 'App Registration ID:'
 Write-Host $myApp.ObjectID
+Write-Host '-----'
