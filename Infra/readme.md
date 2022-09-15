@@ -17,6 +17,10 @@ Run the script replacing the tenantId and your Azure App Registration name:
 .\app-reg-application-cc.ps1 -tenantId 5698af84-5720-4ff0-bdc3-9d9195314244 -appName AppRegTest
 ```
 
+```
+.\app-reg-graph.ps1 -tenantId 5698af84-5720-4ff0-bdc3-9d9195314244 -appName AppGraphTest
+```
+
 # Login Azure CLI 
 
 ```

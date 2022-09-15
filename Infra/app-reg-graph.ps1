@@ -41,7 +41,7 @@ if(!($myApp = Get-AzureADApplication -Filter "DisplayName eq '$($appName)'"  -Er
 ##################################
 ### Create an RequiredResourceAccess for the Application Graph permissions
 ##################################
-$req = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
+$graphRequiredResourceAccess = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
 $acc1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "62a82d76-70ea-41e2-9197-370581804d09","Role"
 $acc2 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "5b567255-7703-4780-807c-7be8301ae99b","Role"
 $acc3 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "9e3f62cf-ca93-4989-b6ce-bf83c28f9fe8","Role"
@@ -49,9 +49,26 @@ $acc4 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -Argu
 $acc5 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "df021288-bdef-4463-88db-98f22de89214","Role"
 $acc6 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "7ab1d382-f21e-4acd-a863-ba3e13f7da61","Role"
 $acc7 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "19dbc75e-c2e2-444c-a770-ec69d8559fc7","Role"
-$req.ResourceAccess = $acc1,$acc2,$acc3,$acc4,$acc5,$acc6,$acc7
-$req.ResourceAppId = "00000003-0000-0000-c000-000000000000"
-Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $req
+$graphRequiredResourceAccess.ResourceAccess = $acc1,$acc2,$acc3,$acc4,$acc5,$acc6,$acc7
+$graphRequiredResourceAccess.ResourceAppId = "00000003-0000-0000-c000-000000000000"
+#Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $graphRequiredResourceAccess
+
+##################################
+### Create an RequiredResourceAccess for the Application Sharepoint permissions
+##################################
+$sharepointRequiredResourceAccess = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
+$acc1Sharepoint = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "678536fe-1083-478a-9c59-b99265e6b0d3","Role"
+$sharepointRequiredResourceAccess.ResourceAccess = $acc1Sharepoint
+$sharepointRequiredResourceAccess.ResourceAppId = "00000003-0000-0ff1-ce00-000000000000"
+#Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $sharepointRequiredResourceAccess
+
+##################################
+### Create an RequiredResourceAccess list
+##################################
+$requiredResourceAccessItems = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
+$requiredResourceAccessItems.Add($graphRequiredResourceAccess)
+$requiredResourceAccessItems.Add($sharepointRequiredResourceAccess)
+Set-AzureADApplication -ObjectId $myApp.ObjectId -RequiredResourceAccess $requiredResourceAccessItems
 
 ##################################
 ### Disable the App Registration scope.
