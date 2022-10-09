@@ -8,6 +8,10 @@ https://damienbod.com/2022/08/29/secure-asp-net-core-grpc-api-hosted-in-a-linux-
 
 ![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/appServiceGrpc_01.png)
 
+## History
+
+2022-10-09 Updated packages
+
 ## Links
 
 https://github.com/grpc/grpc-dotnet/
