@@ -40,13 +40,12 @@ else
 
     var handler = new HttpClientHandler();
 
-    var channel = GrpcChannel.ForAddress(
-        configuration["AzureADServiceApi:ApiBaseAddress"], 
+    var channel = GrpcChannel.ForAddress(configuration["AzureADServiceApi:ApiBaseAddress"], 
         new GrpcChannelOptions
-    {
-        HttpClient = new HttpClient(handler)
+        {
+            HttpClient = new HttpClient(handler)
         
-    });
+        });
 
     CallOptions callOptions = new CallOptions(metadata);
 
