@@ -49,14 +49,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
+app.MapGrpcService<GreeterService>();
+app.MapGet("/", async context =>
 {
-    endpoints.MapGrpcService<GreeterService>();
-
-    endpoints.MapGet("/", async context =>
-    {
-        await context.Response.WriteAsync("GRPC service running...");
-    });
+    await context.Response.WriteAsync("GRPC service running...");
 });
 
 app.Run();

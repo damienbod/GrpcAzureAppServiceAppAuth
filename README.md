@@ -10,6 +10,8 @@ https://damienbod.com/2022/08/29/secure-asp-net-core-grpc-api-hosted-in-a-linux-
 
 ## History
 
+2023-08-14 Updated packages
+
 2023-04-17 Updated packages
 
 2023-01-29 Updated packages
