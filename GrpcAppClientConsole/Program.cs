@@ -46,7 +46,7 @@ else
             HttpClient = new HttpClient(handler)
         });
 
-    CallOptions callOptions = new CallOptions(metadata);
+    var callOptions = new CallOptions(metadata);
 
     var client = new Greeter.GreeterClient(channel);
 
