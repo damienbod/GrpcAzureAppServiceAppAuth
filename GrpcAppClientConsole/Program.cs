@@ -1,8 +1,8 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using GrpcAzureAppServiceAppAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
-using Grpc.Core;
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -40,11 +40,10 @@ else
 
     var handler = new HttpClientHandler();
 
-    var channel = GrpcChannel.ForAddress(configuration["AzureADServiceApi:ApiBaseAddress"]!, 
+    var channel = GrpcChannel.ForAddress(configuration["AzureADServiceApi:ApiBaseAddress"]!,
         new GrpcChannelOptions
         {
             HttpClient = new HttpClient(handler)
-        
         });
 
     CallOptions callOptions = new CallOptions(metadata);
