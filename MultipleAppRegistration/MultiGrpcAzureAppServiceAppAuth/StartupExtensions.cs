@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Serilog;
 
@@ -11,9 +12,12 @@ internal static class StartupExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        // Add services to the container.
+        builder.Configuration.AddJsonFile("appsettings.json");
+
+        var test = configuration["AzureAd:ClientId"]!;
+
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
+            .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
         builder.Services.AddAuthorization(options =>
         {
@@ -46,7 +50,7 @@ internal static class StartupExtensions
         builder.WebHost.ConfigureKestrel(options =>
         {
             options.ListenAnyIP(8080);
-            options.ListenAnyIP(7179, listenOptions =>
+            options.ListenAnyIP(7180, listenOptions =>
             {
                 listenOptions.UseHttps(); // required for local debugging, not for the Azure deployment
                 listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
