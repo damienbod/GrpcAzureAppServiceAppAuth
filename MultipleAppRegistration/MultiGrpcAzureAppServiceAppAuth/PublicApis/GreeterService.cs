@@ -2,7 +2,7 @@ using Grpc.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GrpcAzureAppServiceAppAuth;
+namespace MultiGrpcAzureAppServiceAppAuth;
 
 [Authorize(Policy = "ValidateAccessTokenPolicy", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class GreeterService : Greeter.GreeterBase

@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
-using GrpcAzureAppServiceAppAuth;
+using MultiGrpcAzureAppServiceAppAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 

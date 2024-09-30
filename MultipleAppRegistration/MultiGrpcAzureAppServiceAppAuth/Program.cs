@@ -1,66 +1,32 @@
-using GrpcAzureAppServiceAppAuth;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Microsoft.IdentityModel.Logging;
+using MultiGrpcAzureAppServiceAppAuth;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+Log.Information("Starting ME-ID API");
 
-builder.Services.AddAuthorization(options =>
+try
 {
-    options.AddPolicy("ValidateAccessTokenPolicy", validateAccessTokenPolicy =>
-    {
-        // Validate id of application for which the token was created
-        // In this case the CC client application 
-        // Works with multi-tenant app registrations
-        validateAccessTokenPolicy.RequireClaim("azp", builder.Configuration["AzureAd:ClientId"]!);
+    var builder = WebApplication.CreateBuilder(args);
 
-        // Value of Azure App Registration where role is defined (resource)
-        validateAccessTokenPolicy.RequireClaim("aud", builder.Configuration["AzureAd:Audience"]!);
+    builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .ReadFrom.Configuration(context.Configuration));
 
-        // Single tenant Enterprise application object ID
-        // Only validate if locking down to a single Enterprise application.
-        validateAccessTokenPolicy.RequireClaim("oid", builder.Configuration["AzureAd:Oid"]!);
+    var app = builder
+        .ConfigureServices()
+        .Configure();
 
-        // only allow tokens which used "Private key JWT Client authentication"
-        // // https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens
-        // Indicates how the client was authenticated. For a public client, the value is "0". 
-        // If client ID and client secret are used, the value is "1". 
-        // If a client certificate was used for authentication, the value is "2".
-        validateAccessTokenPolicy.RequireClaim("azpacr", "1");
-    });
-});
-
-builder.Services.AddGrpc();
-
-// Configure Kestrel to listen on a specific HTTP port 
-builder.WebHost.ConfigureKestrel(options =>
+    app.Run();
+}
+catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException" && ex.GetType().Name is not "HostAbortedException")
 {
-    options.ListenAnyIP(8080);
-    options.ListenAnyIP(7179, listenOptions =>
-    {
-        listenOptions.UseHttps(); // required for local debugging, not for the Azure deployment
-        listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
-    });
-});
-
-IdentityModelEventSource.ShowPII = true;
-
-var app = builder.Build();
-
-app.UseHttpsRedirection();
-
-app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapGrpcService<GreeterService>();
-app.MapGet("/", async context =>
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
 {
-    await context.Response.WriteAsync("GRPC service running...");
-});
-
-app.Run();
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}
