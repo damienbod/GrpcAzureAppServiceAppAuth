@@ -15,7 +15,15 @@ builder.Services.AddAuthorization(options =>
     {
         // Validate id of application for which the token was created
         // In this case the CC client application 
-        validateAccessTokenPolicy.RequireClaim("azp", "19893e32-3f4d-4c5a-b5ca-27891cf75666");
+        // Works with multi-tenant app registrations
+        validateAccessTokenPolicy.RequireClaim("azp", builder.Configuration["AzureAd:ClientId"]!);
+
+        // Value of Azure App Registration where role is defined (resource)
+        validateAccessTokenPolicy.RequireClaim("aud", builder.Configuration["AzureAd:Audience"]!);
+
+        // Single tenant Enterprise application object ID
+        // Only validate if locking down to a single Enterprise application.
+        validateAccessTokenPolicy.RequireClaim("oid", builder.Configuration["AzureAd:Oid"]!);
 
         // only allow tokens which used "Private key JWT Client authentication"
         // // https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens
