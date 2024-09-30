@@ -1,8 +1,8 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
-using MultiGrpcAzureAppServiceAppAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
+using MultiGrpcAzureAppServiceAppAuth;
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
