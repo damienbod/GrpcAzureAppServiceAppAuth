@@ -26,6 +26,8 @@ https://damienbod.com/2022/08/29/secure-asp-net-core-grpc-api-hosted-in-a-linux-
 
 https://github.com/AzureAD/microsoft-identity-web/wiki
 
+https://learn.microsoft.com/en-us/entra/identity-platform/
+
 https://github.com/grpc/grpc-dotnet/
 
 https://docs.microsoft.com/en-us/aspnet/core/grpc
