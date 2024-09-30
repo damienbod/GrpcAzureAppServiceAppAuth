@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Serilog;
+using System.Security.Claims;
 
 namespace MultiGrpcAzureAppServiceAppAuth;
 
@@ -28,7 +29,8 @@ internal static class StartupExtensions
 
                 // Single tenant Enterprise application object ID
                 // Only validate if locking down to a single Enterprise application.
-                validateAccessTokenPolicy.RequireClaim("oid", configuration["AzureAd:Oid"]!);
+                // oid or "http://schemas.microsoft.com/identity/claims/objectidentifier" depending on your mappings
+                validateAccessTokenPolicy.RequireClaim("http://schemas.microsoft.com/identity/claims/objectidentifier", configuration["AzureAd:Oid"]!);
 
                 // only allow tokens which used "Private key JWT Client authentication"
                 // // https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens
