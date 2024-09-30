@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Serilog;
 
@@ -11,10 +10,6 @@ internal static class StartupExtensions
     {
         var services = builder.Services;
         var configuration = builder.Configuration;
-
-        builder.Configuration.AddJsonFile("appsettings.json");
-
-        var test = configuration["AzureAd:ClientId"]!;
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
