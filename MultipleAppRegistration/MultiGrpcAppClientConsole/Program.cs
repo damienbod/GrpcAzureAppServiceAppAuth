@@ -6,7 +6,7 @@ using Microsoft.Identity.Client;
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddUserSecrets("0464abbd-c57d-4048-873d-d16355586e50")
+    .AddUserSecrets("86ed0066-89d8-4d2d-982a-b74e6cfb880e")
     .AddJsonFile("appsettings.json");
 
 var configuration = builder.Build();
