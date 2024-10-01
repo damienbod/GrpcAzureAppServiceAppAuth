@@ -21,10 +21,10 @@ internal static class StartupExtensions
             {
                 // Validate id of application for which the token was created
                 // In this case the CC client application 
-                // Works with multi-tenant app registrations
+                // Works with multi-tenant App registrations
                 validateAccessTokenPolicy.RequireClaim("azp", configuration["AzureAd:ClientId"]!);
 
-                // Value of Azure App Registration where role is defined (resource)
+                // Value of Microsoft Entra App registration where role is defined (resource)
                 validateAccessTokenPolicy.RequireClaim("aud", configuration["AzureAd:Audience"]!);
 
                 // Single tenant Enterprise application object ID
