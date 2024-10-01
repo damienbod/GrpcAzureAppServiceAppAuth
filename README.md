@@ -8,9 +8,19 @@ https://damienbod.com/2022/08/29/secure-asp-net-core-grpc-api-hosted-in-a-linux-
 
 ![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/appServiceGrpc_01.png)
 
+## Microsoft Entra ID App-to-App security architecture
+
+Single:
+
+![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/single_app_registration_01.png)
+
+Multiple:
+
+![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/single_app_registration_02.png)
+
 ## History
 
-- 2024-09-30 Updated packages
+- 2024-10-01 Updated packages, add docs
 - 2024-07-03 Updated packages
 - 2024-06-22 Updated packages
 - 2024-04-25 Updated packages
