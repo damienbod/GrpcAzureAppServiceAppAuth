@@ -10,6 +10,8 @@ https://damienbod.com/2022/08/29/secure-asp-net-core-grpc-api-hosted-in-a-linux-
 
 ## Microsoft Entra ID App-to-App security architecture
 
+https://damienbod.com/2024/10/07/microsoft-entra-id-app-to-app-security-architecture/
+
 Single:
 
 ![setup](https://github.com/damienbod/GrpcAzureAppServiceAppAuth/blob/main/images/single_app_registration_01.png)
