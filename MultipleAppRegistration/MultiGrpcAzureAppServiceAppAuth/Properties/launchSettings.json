@@ -1,12 +1,12 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "GrpcAzureAppServiceAppAuth": {
+    "MultiGrpcAzureAppServiceAppAuth": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "",
-      "applicationUrl": "https://localhost:7179;",
+      "applicationUrl": "https://localhost:7180;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

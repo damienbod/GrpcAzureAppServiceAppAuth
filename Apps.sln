@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{59D9BBAC-997A-4EF7-A08E-78DDA1363977}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SingleAppRegistration", "SingleAppRegistration", "{B35A4E88-F1E9-4881-AE46-16CE915A0C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcAzureAppServiceAppAuth", "SingleAppRegistration\GrpcAzureAppServiceAppAuth\GrpcAzureAppServiceAppAuth.csproj", "{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcAppClientConsole", "SingleAppRegistration\GrpcAppClientConsole\GrpcAppClientConsole.csproj", "{8ADA2543-E458-4E3F-BC2F-BD33C41237EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MultipleAppRegistration", "MultipleAppRegistration", "{697B2F5F-7475-4120-894F-B70F313E0D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiGrpcAzureAppServiceAppAuth", "MultipleAppRegistration\MultiGrpcAzureAppServiceAppAuth\MultiGrpcAzureAppServiceAppAuth.csproj", "{28A6C39C-8E19-441C-AB50-CFD3A8050731}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiGrpcAppClientConsole", "MultipleAppRegistration\MultiGrpcAppClientConsole\MultiGrpcAppClientConsole.csproj", "{4C72E7CE-301C-4EE1-A99A-49725A92F3A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADA2543-E458-4E3F-BC2F-BD33C41237EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADA2543-E458-4E3F-BC2F-BD33C41237EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADA2543-E458-4E3F-BC2F-BD33C41237EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADA2543-E458-4E3F-BC2F-BD33C41237EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A6C39C-8E19-441C-AB50-CFD3A8050731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A6C39C-8E19-441C-AB50-CFD3A8050731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A6C39C-8E19-441C-AB50-CFD3A8050731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A6C39C-8E19-441C-AB50-CFD3A8050731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C72E7CE-301C-4EE1-A99A-49725A92F3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C72E7CE-301C-4EE1-A99A-49725A92F3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C72E7CE-301C-4EE1-A99A-49725A92F3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C72E7CE-301C-4EE1-A99A-49725A92F3A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BA2D3E6-4DE9-4278-BD80-D2D1C622A497} = {B35A4E88-F1E9-4881-AE46-16CE915A0C06}
+		{8ADA2543-E458-4E3F-BC2F-BD33C41237EA} = {B35A4E88-F1E9-4881-AE46-16CE915A0C06}
+		{28A6C39C-8E19-441C-AB50-CFD3A8050731} = {697B2F5F-7475-4120-894F-B70F313E0D44}
+		{4C72E7CE-301C-4EE1-A99A-49725A92F3A5} = {697B2F5F-7475-4120-894F-B70F313E0D44}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {189B5767-904B-41F8-8D61-4FA8ECFDC9DD}
+	EndGlobalSection
+EndGlobal
