@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Serilog;
-using System.Security.Claims;
 
 namespace MultiGrpcAzureAppServiceAppAuth;
 
