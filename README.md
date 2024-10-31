@@ -22,6 +22,7 @@ Multiple:
 
 ## History
 
+- 2024-10-31 Updated packages
 - 2024-10-01 Updated packages, add docs
 - 2024-07-03 Updated packages
 - 2024-06-22 Updated packages
