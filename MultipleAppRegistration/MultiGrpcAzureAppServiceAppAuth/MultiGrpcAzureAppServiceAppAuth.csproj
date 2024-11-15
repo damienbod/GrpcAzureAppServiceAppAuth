@@ -11,11 +11,11 @@
     </ItemGroup>
 	
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="3.3.1" />
     
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
 
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
