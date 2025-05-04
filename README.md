@@ -22,6 +22,7 @@ Multiple:
 
 ## History
 
+- 2025-05-04 .NET 9
 - 2024-11-15 .NET 9
 - 2024-10-31 Updated packages
 - 2024-10-01 Updated packages, add docs
