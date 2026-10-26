@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/MultipleAppRegistration/">
+    <Project Path="MultipleAppRegistration/MultiGrpcAppClientConsole/MultiGrpcAppClientConsole.csproj" />
+    <Project Path="MultipleAppRegistration/MultiGrpcAzureAppServiceAppAuth/MultiGrpcAzureAppServiceAppAuth.csproj" />
+  </Folder>
+  <Folder Name="/SingleAppRegistration/">
+    <Project Path="SingleAppRegistration/GrpcAppClientConsole/GrpcAppClientConsole.csproj" />
+    <Project Path="SingleAppRegistration/GrpcAzureAppServiceAppAuth/GrpcAzureAppServiceAppAuth.csproj" />
+  </Folder>
+  <Folder Name="/_SolutionItems/">
+    <File Path=".github/workflows/dotnet.yml" />
+    <File Path="README.md" />
+  </Folder>
+</Solution>
